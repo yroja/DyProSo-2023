@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 style="text-align: center;">User accounts</h2>
+        <br th:if="${!success} and ${!successfullyDelete}">
+        <div th:if="${success}" class="ui positive message" style="width: 50%; margin-left: auto; margin-right:auto;text-align: center;">
+            <div class="header">
+                Verification mail has been sent.
+            </div>
+        </div>
+        <div th:if="${successfullyDelete}" class="ui positive message" style="width: 50%; margin-left: auto;margin-right:auto;">
+            <div class="header">
+                Deleted successfully
+            </div>
+                <p>You have successfully deleted <strong th:text="${deletedUser.getMail()}"></strong></p>
+        </div>
+        <table class="ui table" style="margin-left: auto;margin-right: auto; width: 80%;">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th style="text-align: center;">Verified</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getMail()}"></td>
+                <td th:if="${!user.isVerified()}" style="text-align: center;"><i class="x icon"></i></td>
+                <td th:if="${user.isVerified()}" style="text-align: center;"><i class="check icon"></i></td>
+                <td th:if="${!user.isVerified()}" style="text-align: center;">
+                    <form th:action="@{/admin/resendVerification/{id}(id=${user.getId()})}" method="post">
+                        <button class="ui button" type="submit">Resend verification</button>
+                    </form>
+                </td>
+                <td th:if="${user.isVerified()}"></td>
+                <td></td>
+                <td>
+                    <form th:id="delete + ${user.getId()}" th:action="@{/admin/delete/{id}(id=${user.getId()})}" method="post">
+                        <a th:onclick="box('[[${user.getId()}]]')" style="cursor: pointer;float: right;" type="submit">
+                            <i class="trash icon" style="color:red;"></i>
+                        </a>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+<script>
+    function box(id){
+        var userval=confirm("Do u want to continue?");
+        if(userval==true){
+            document.getElementById("delete" + id).submit();
+        }
+    }
+</script>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+
+</script>
+</body>
+</html>

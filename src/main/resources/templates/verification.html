@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <div class="ui grid" id="log_form">
+
+            <div class="row">
+                <div class="column">
+                    <h2 style="text-align: center;" class="ui header">Create account</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="ui positive message" style="text-align: center;">
+                        <div class="header">
+                            You have signed up successfully!
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+
+<br>
+
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+
+
+</html>

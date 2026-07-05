@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+  <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+  <div class="ui segment">
+    <div class="grid_container" style="position:relative;">
+    <div id="travel_text">
+    <h2>Accommodation</h2>
+    <p>The "first come - first serve" concept applies to these offers.</p>
+
+    <div th:each="hotel : ${allHotels}" th:id="${hotel.getId()}">
+      <div th:if="${hotelId} != ${hotel.getId()}">
+        <form th:id="'edit'+${hotel.getId()}"  th:action="@{travel/edit/{id}(id=${hotel.getId()})}" method="post">
+        <p><b style="font-size: 110%" th:text="${hotel.getName()}"></b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <a style="cursor: pointer; float: right" type="submit" sec:authorize="hasRole('ADMIN')" th:onclick="document.getElementById('edit'+[[${hotel.getId()}]]).submit()">
+            <i class="edit icon" style="color: gray;"></i>
+        </a>
+        </form>
+        <form th:id="'delete'+${hotel.getId()}"  th:action="@{travel/delete/{id}(id=${hotel.getId()})}" method="post">
+          </a><a style="cursor: pointer; float: right" type="submit" sec:authorize="hasRole('ADMIN')" th:onclick="document.getElementById('delete'+[[${hotel.getId()}]]).submit()">
+          <i class="trash icon" style="color: red;"></i>
+        </a>
+        </form>
+        </p>
+        <span th:text="${hotel.getText()}" style="width: 300px; white-space: pre-line"></span>
+        <p th:if="${hotel.getLink()!=''}">Link to Website: <a th:href="@{//{id}(id=${hotel.getLink()})}" target="_blank" rel="noopener noreferrer">here</a></p>
+        <br>
+      </div>
+      <form sec:authorize="hasRole('ADMIN')" th:if="${hotelId} == ${hotel.getId()}" th:id="'save'+${hotel.getId()}" th:action="@{travel/save/{id}(id=${hotel.getId()})}" method="post">
+          <p>
+            <input name="name" id="name" style="font-size: 150%" th:value="${hotel.getName()}">
+            <a style="cursor: pointer" type="submit" th:onclick="document.getElementById('save'+[[${hotel.getId()}]]).submit()">
+              <i class="save icon" style="color: gray;"></i>
+            </a>
+        </p><br>
+        <textarea name="text" id="text" rows="7" cols="40" required="required" autofocus="autofocus" autocomplete="off" maxlength="2000" ></textarea>
+        <br>
+      </form>
+    </div>
+      <a th:href="@{/travel/edit/create_hotel}" sec:authorize="hasRole('ADMIN')">ADMIN: Create New Hotel Entry</a>
+
+    </div>
+
+    <div id="map_container" class="map_responsive2">
+    <iframe src="https://www.google.com/maps/d/embed?mid=18MyDriw0SE_EWeM49Y8cSX40qmMRgv0&ehbc=2E312F&hl=en" width="620" height="800"></iframe>
+    </div>
+  </div>
+
+    <h2>Travel</h2>
+    <p style="display: inline;"><strong>Travel information –</strong> For planning your travel to Dresden have a look at the <a href="https://www.dresden.de/en/tourism/information/arrival-transport-hotel-signage-system.php" target="_blank" rel="noopener noreferrer">“Arrival & Public Transport”</a> site of the web presence of Dresden.</p>
+    <br><br>
+    <p style="color: black">For arrival by train click <a th:href="@{/travel/train}">here</a>.</p>
+    <p style="color: black">For arrival by plane click <a th:href="@{/travel/plane}">here</a>.</p><br>
+  </div>
+
+
+    <div th:include="footer :: footer"></div><br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+<script th:inline="javascript">
+  document.getElementById("text").value += [[${currentHotel.getText()}]];
+</script>
+</body>
+</html>

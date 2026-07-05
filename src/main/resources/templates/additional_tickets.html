@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2>Purchase additional tickets</h2>
+        <p>Here you have the possibility to buy additional tickets (e.g. family member) for the conference dinner or the <a th:href="@{/excursion}" target="_blank" rel="noopener noreferrer">excursion</a>. A separate invoice will be generated for each accompanying person.</p>
+        <form class="ui form" method="post" th:action="@{/additional_tickets}" th:object="${companionForm}">
+        <h4 class="ui header">Billing address</h4>
+            <div class="inline field">
+                <div class="ui segment" style="width: fit-content;">
+                    <div class="ui checkbox">
+                        <input type="checkbox" class="hidden" name="same_billing_address" th:field="*{same_billing_address}" id="same_billing_address" >
+                        <label>Same as my billing address</label>
+                    </div>
+                </div>
+
+            </div>
+            <div id="billing_address">
+            <h4 class="ui header">Type of billing address</h4>
+            <div class="inline fields">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_non_EU(this)" value="PERSONAL" tabindex="0" class="hidden" >
+                        <label>Personal billing address</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_in_EU(this)" value="EU" tabindex="0" class="hidden" >
+                        <label>Business address (Institution / Company) within EU</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_non_EU(this)" value="NONEU" tabindex="0" class="hidden">
+                        <label>Business address (Institution / Company) non-EU</label>
+                    </div>
+                </div>
+            </div>
+                <div th:if="${#fields.hasErrors('type_of_billing_address')}" th:errors="*{type_of_billing_address}" style="color: red"
+                     class="invalid-feedback"></div>
+        <div class="field" id="billing_address_form" style="display:none;">
+            <div class="fields">
+                <div class="three wide required field">
+                    <label>Last name</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_lastname()}" name="billing_address_lastname" th:field="*{billing_address_lastname}" id="billing_address_lastname" placeholder="Smith" >
+                    <div th:if="${#fields.hasErrors('billing_address_lastname')}" th:errors="*{billing_address_lastname}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+                <div class="four wide required field">
+                    <label>First name(s)</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_firstname()}" name="billing_address_firstname" th:field="*{billing_address_firstname}" id="billing_address_firstname" placeholder="John" >
+                    <div th:if="${#fields.hasErrors('billing_address_firstname')}" th:errors="*{billing_address_firstname}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+                <div class="nine wide field">
+                    <label>Company name or post office box of the university</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_poBox()}" name="billing_address_poBox" th:field="*{billing_address_poBox}" placeholder="Institut für Angewandte Physik (IAP), Technische Universität Dresden">
+                    <div th:if="${#fields.hasErrors('billing_address_poBox')}" th:errors="*{billing_address_poBox}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="fields">
+                <div class="twelve wide required field">
+                    <label>Street</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_street()}" th:field="*{billing_address_street}" placeholder="Nöthnitzer Str. 61" name="billing_address_street">
+                    <div th:if="${#fields.hasErrors('billing_address_street')}" th:errors="*{billing_address_street}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+                <div class="four wide required field">
+                    <label>Postal code</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_postalCode()}" th:field="*{billing_address_postalCode}" placeholder="01187" name="billing_address_postalCode">
+                    <div th:if="${#fields.hasErrors('billing_address_postalCode')}" th:errors="*{billing_address_postalCode}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="required field">
+                    <label>City</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_city()}" th:field="*{billing_address_city}" placeholder="Dresden" name="billing_address_city" id="billing_address_city">
+                    <div th:if="${#fields.hasErrors('billing_address_city')}" th:errors="*{billing_address_city}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+                <div class="required field">
+                    <label>Country</label>
+                    <input type="text" autocomplete="off" th:value="${user.getBilling_address_country()}" th:field="*{billing_address_country}" placeholder="Germany" name="billing_address_country" id="billing_address_country">
+                    <div th:if="${#fields.hasErrors('billing_address_country')}" th:errors="*{billing_address_country}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div id="vat_number_form" class="required field" style="display:none;">
+                <label>Institution/Company VAT number</label>
+                <input type="text" autocomplete="off" placeholder="IE1234567T" name="vat_number" th:field="*{vat_number}">
+                <div th:if="${#fields.hasErrors('vat_number')}" th:errors="*{vat_number}" style="color: red"
+                     class="invalid-feedback"></div>
+            </div>
+        </div>
+            </div>
+
+        <h4 >Additional ticket for the conference dinner(€50)</h4>
+
+        <div class="inline fields">
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="social_programm" th:field="*{social_programm}" value="TRUE" required="required" >
+                    <label>Yes</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="social_programm" th:field="*{social_programm}" value="FALSE" required="required">
+                    <label>No</label>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="margin-bottom:-1px;">Additional ticket for the excursion to the HZDR (€40)</h4>
+            <p style="color: gray; font-size: 12px;margin-top:-1px;">Photo ID (passport or ID card) is required for the excursion</p>
+        <div class="inline fields">
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="hzdr" th:field="*{hzdr}" onchange="show_form(this)" value="TRUE" required="required" >
+                    <label>Yes</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="hzdr" th:field="*{hzdr}" onchange="hide_form(this)" value="FALSE" required="required">
+                    <label>No</label>
+                </div>
+            </div>
+        </div>
+            <div th:if="${#fields.hasErrors('hzdr')}" th:errors="*{hzdr}" style="color: red"
+                 class="invalid-feedback"></div>
+            <div id="excursion_form" style="display:none;padding-bottom:5px;">
+                <p style="color: gray; font-size: 12px;line-height:0px;">Name as it appears on your ID card or passport</p>
+                <div class="two fields">
+                    <div class="required field">
+                        <label>Last name</label>
+                        <input type="text" autocomplete="off" placeholder="Smith" name="hzdr_lastname" th:field="*{hzdr_lastname}">
+                        <div th:if="${#fields.hasErrors('hzdr_lastname')}" th:errors="*{hzdr_lastname}" style="color: red"
+                             class="invalid-feedback"></div>
+                    </div>
+                    <div class="required field">
+                        <label>First name(s)</label>
+                        <input type="text" autocomplete="off" placeholder="John" name="hzdr_firstname" th:field="*{hzdr_firstname}">
+                        <div th:if="${#fields.hasErrors('hzdr_firstname')}" th:errors="*{hzdr_firstname}" style="color: red"
+                             class="invalid-feedback"></div>
+                    </div>
+                </div>
+
+
+                <div class="fields">
+                    <div class="six wide required field">
+                        <label>Passport-/ID card number</label>
+                        <input type="text" autocomplete="off" placeholder="L01X00T47" name="hzdr_cardnumber" th:field="*{hzdr_cardnumber}">
+                        <div th:if="${#fields.hasErrors('hzdr_cardnumber')}" th:errors="*{hzdr_cardnumber}" style="color: red"
+                             class="invalid-feedback"></div>
+                    </div>
+                    <div class="ten wide required field">
+                        <label>Date of birth</label>
+                        <input type="date" placeholder="19.05.2000" name="hzdr_birthdate" th:field="*{hzdr_birthdate}">
+                        <div th:if="${#fields.hasErrors('hzdr_birthdate')}" th:errors="*{hzdr_birthdate}" style="color: red"
+                             class="invalid-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="ui button" type="submit">Submit</button>
+            <a th:href="@{/profile}"><button class="ui button" type="button">Cancel</button></a>
+        </form>
+
+
+    </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+<script>
+    $("#same_billing_address").change(function() { $("#billing_address").toggle() } );
+</script>
+<script>
+    const checkbox = document.querySelector("#same_billing_address");
+const div = document.querySelector("#billing_address");
+if(checkbox.checked){  //if checkbox not checked
+  div.style.display = "none"; //hide div
+}else{
+  div.style.display = "initial";
+  };
+</script>
+<script>
+    window.onload = function(){
+    show_type_form();
+    show_excursion_form();
+  };
+
+
+  function show_type_form(){
+    var radioButtons = document.getElementsByName("type_of_billing_address");
+  var divBlockX = document.getElementById("billing_address_form");
+  var divBlockY = document.getElementById("vat_number_form");
+
+  for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      if (radioButtons[i].value === "EU") {
+        divBlockX.style.display = "block";
+        divBlockY.style.display = "block";
+      } else {
+        divBlockX.style.display = "block";
+        divBlockY.style.display = "none";
+      }
+      return;
+    }
+  }
+
+  divBlockX.style.display = "none";
+  divBlockY.style.display = "none";
+  }
+
+
+  function show_excursion_form(){
+    var radioButtons = document.getElementsByName("hzdr");
+  var divBlockX = document.getElementById("excursion_form");
+
+  for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      if (radioButtons[i].value === "TRUE") {
+        divBlockX.style.display = "block";
+        return;
+      }
+    }
+  }
+
+  divBlockX.style.display = "none";
+  }
+</script>
+</body>
+</html>

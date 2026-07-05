@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 class="ui header">Abstract submission</h2>
+        <p>Please note that you can upload a maximum of 3 abstracts in total and you will not be able to edit your abstracts after submission.<br>If you encounter any problems, please contact us <a href="/contact">here</a>.</p>
+
+        <div id="upload_msg1" th:if="${maxAmountOfFiles} or ${maxFileSize}">
+        <div th:if="${maxAmountOfFiles}" class="ui negative message">
+            <div class="header">
+                Maximum number of uploaded files reached.
+            </div>
+            <p>You already uploaded 3 files. If you want to upload other files, please contact our support.</p>
+        </div>
+
+        <div th:if="${maxFileSize}" class="ui negative message">
+            <div class="header">
+                Maximum file size exceeded.
+            </div>
+            <p>You have exceeded the maximum file size of 10 MB.</p>
+        </div>
+        </div>
+        <div id="upload_msg2" th:if="${!successPoster} or ${!successCategories} or ${successUpload} or ${exceededCategories}">
+        <div th:if="${!successPoster}" class="ui negative message">
+            <div class="header">
+                Missing type.
+            </div>
+            <p>Please assign a type to your abstract.</p>
+        </div>
+        <div th:if="${!successCategories}" class="ui negative message">
+            <div class="header">
+                Missing categories.
+            </div>
+            <p>Please assign at least one category to your abstract.</p>
+        </div>
+            <div th:if="${exceededCategories}" class="ui negative message">
+                <div class="header">
+                    The maximum number of tags has been exceeded.
+                </div>
+                <p>You have exceeded the maximum number of tags. Please note that you can use a maximum of 3 tags per abstract.</p>
+            </div>
+        <div th:if="${successUpload}" class="ui positive message">
+            <div class="header">
+                Upload successful.
+            </div>
+            <p>Your file <strong th:text="${uploadedFile}"></strong> has been successfully uploaded.</p>
+        </div>
+        </div>
+
+        <form th:action="@{/upload}" th:object="${docForm}" method="post" enctype="multipart/form-data">
+            <div class="ui form">
+                <div class="inline fields">
+                    <label>Type:</label>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="poster" value="TRUE" tabindex="0" class="hidden">
+                            <label>Poster</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="poster" value="FALSE" tabindex="0" class="hidden">
+                            <label>Talk</label>
+                        </div>
+                    </div>
+                </div>
+
+
+        <div class="field" style="width:50%;">
+            <label>Choose a category</label>
+            <div class="ui fluid multiple search selection dropdown">
+                <input type="hidden" name="categories" required="required">
+                <i class="dropdown icon"></i>
+                <div class="default text">Categories</div>
+                <div class="menu">
+                    <div class="item" data-value="Dynamic properties of matter;">
+                        <div class="ui red empty circular label"></div>
+                        Dynamic properties of matter
+                    </div>
+                    <div class="item" data-value="Phonons, plasmons, magnons, polaritons, electromagnons, spins;">
+                        <div class="ui blue empty circular label"></div>
+                        Phonons, plasmons, magnons, polaritons, electromagnons, spins
+                    </div>
+                    <div class="item" data-value="(Multi)ferroic materials;">
+                        <div class="ui black empty circular label"></div>
+                        (Multi)ferroic materials
+                    </div>
+                    <div class="item" data-value="Strongly correlated electron systems;">
+                        <div class="ui purple empty circular label"></div>
+                        Strongly correlated electron systems
+                    </div>
+                    <div class="item" data-value="Low-dimensional structures;">
+                        <div class="ui orange empty circular label"></div>
+                        Low-dimensional structures
+                    </div>
+                    <div class="item" data-value="Disordered, amorphous and soft matter;">
+                        <div class="ui yellow empty circular label"></div>
+                        Disordered, amorphous and soft matter
+                    </div>
+                    <div class="item" data-value="Materials under extreme conditions;">
+                        <div class="ui green empty circular label"></div>
+                        Materials under extreme conditions
+                    </div>
+                    <div class="item" data-value="Frontiers of experimental and theoretical methods;">
+                        <div class="ui brown empty circular label"></div>
+                        Frontiers of experimental and theoretical methods
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+            <br>
+
+            <input type="file" name="file" required>
+            <input type="submit" value="upload files">
+        </form>
+        <br>
+
+    </div>
+    <div th:include="footer :: footer"></div><br>
+</div>
+
+</body>
+</html>

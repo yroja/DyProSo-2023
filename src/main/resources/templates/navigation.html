@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<nav th:fragment="navigation" id="nav">
+
+
+
+
+
+    <div class="ui grid">
+    <div class="computer only row">
+    <div class="ui large menu" style="width: 100%;">
+        <a class="item" th:href="@{/}">
+            Home
+        </a>
+        <div class="ui dropdown item">
+            About DyProSo
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" th:href="@{/committee}">Committees</a>
+                <a class="item" th:href="@{/prev}">Previous DyProSo Conferences</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            Programme
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" th:href="@{/topics}">Topics</a>
+                <a class="item" th:href="@{/timetable}" >Timetable</a>
+                <a class="item" th:href="@{/invited_speakers}" >Invited Speakers</a>
+                <a class="item" th:href="@{/excursion}" >Excursion</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            For Participants
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" th:href="@{/important_dates}">Important Dates & Fees</a>
+                <a class="item" th:href="@{/venue}">Venue</a>
+                <a class="item" th:href="@{/travel_accommodation}">Accommodation & Travel</a>
+                <a class="item" th:href="@{/create_account}" sec:authorize="!isAuthenticated()">Create Account</a>
+                <a class="item" sec:authorize="hasRole('USER')" th:href="@{/abstract}" >Abstract Submission</a>
+            </div>
+        </div>
+        <a class="item" th:href="@{/tourism}" style="text-align: center;">
+            Tourism
+        </a>
+        <a class="item" th:href="@{/sponsors}" style="text-align: center;">
+            Sponsors
+        </a>
+        <div class="right menu">
+            <a class="ui item" th:href="@{/profile}" sec:authorize="hasRole('USER')" style="text-align: center;"><i class="user icon"></i>Profile</a>
+
+            <a class="ui item" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')" style="text-align: center;"><i class="user icon"></i>
+                Admin
+            </a>
+            <a class="ui item" style="text-align:center;" th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="sign-in icon"></i>Login</a>
+            <a class="ui item" style="text-align:center;" th:href="@{/logout}" sec:authorize="isAuthenticated()"><i class="sign-out icon"></i>Logout</a>
+        </div>
+
+
+
+
+
+
+    </div>
+    </div>
+
+    <div class="tablet mobile only row">
+        <div class="column">
+            <div class="ui sidebar vertical menu" id="vert_menu">
+                <a class="item" th:href="@{/}">
+                    Home
+                </a>
+                <div class="ui item" id="about" style="cursor:pointer;">
+                    About DyProSo
+                    <i class="dropdown icon"></i>
+                    <div id="submenu0" class="menu">
+                        <a class="item" th:href="@{/committee}">Committees</a>
+                        <a class="item" th:href="@{/prev}">Previous DyProSo Conferences</a>
+
+                    </div>
+                </div>
+                <div class="item" id="programme" style="cursor:pointer;">
+                    Programme
+                    <i class="dropdown icon"></i>
+                    <div id="submenu1" class="menu">
+                        <a class="item" th:href="@{/topics}">Topics</a>
+                        <a class="item" th:href="@{/timetable}" >Timetable</a>
+                        <a class="item" th:href="@{/invited_speakers}" >Invited Speakers</a>
+                        <a class="item" th:href="@{/excursion}" >Excursion</a>
+                    </div>
+                </div>
+                <div class="item" id="participants" style="cursor:pointer;">
+                    For Participants
+                    <i class="dropdown icon"></i>
+                    <div id="submenu2" class="menu">
+                        <a class="item" th:href="@{/important_dates}">Important Dates</a>
+                        <a class="item" th:href="@{/venue}">Venue</a>
+                        <a class="item" th:href="@{/travel_accommodation}">Accommodation & Travel</a>
+                        <a class="item" th:href="@{/create_account}" sec:authorize="!isAuthenticated()">Create Account</a>
+                        <a class="item" sec:authorize="hasRole('USER')" th:href="@{/abstract}" >Abstract Submission</a>
+                    </div>
+                </div>
+                <a class="item" th:href="@{/tourism}">
+                    Tourism
+                </a>
+                <a class="item" th:href="@{/sponsors}">
+                    Sponsors
+                </a>
+                <div style="position:fixed; bottom: 0;width:100%;text-align: center;">
+                    <a class="item" th:href="@{/profile}" sec:authorize="hasRole('USER')" style="text-align: center;">Profile</a>
+
+                    <a class="item" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')" style="text-align: center;">Admin</a>
+
+                <a class="item" style="text-align: center;" th:href="@{/login}" sec:authorize="!isAuthenticated()">
+                    Login
+                </a>
+                    <a class="item" style="text-align:center;" th:href="@{/logout}" sec:authorize="isAuthenticated()">
+                        Logout
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="tablet mobile only row">
+                <div class="column">
+                    <div class="ui right menu" id="fixed_menu1">
+                        <a id="sidebar_menu" class="item mobile-button">
+                            <i class="content icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+</nav>
+
+</body>
+</html>

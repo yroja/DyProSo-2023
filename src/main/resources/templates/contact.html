@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 class="ui header">Contact us</h2>
+        <br>
+        <i class="envelope icon" style="margin:0;display:inline;float:left;"></i><p class="contact_val">dyproso-2023@tu-dresden.de</p>
+        <i class="phone icon" style="margin:0;display:inline;float:left;"></i><p class="contact_val">+49 351463-40222</p>
+        <i class="map marker alternate icon" style="margin:0;display:inline;float:left;"></i><p class="contact_val">Prof. Lukas M. Eng<br>Technische Universität Dresden<br>Institut für Angewandte Physik (IAP)<br>Nöthnitzer Str. 61<br>01187 Dresden
+
+    </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+</script>
+
+</body>

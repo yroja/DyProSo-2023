@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 class="ui header">Topics</h2>
+        <ul>
+            <li>Dynamic properties of matter</li>
+            <li>Phonons, plasmons, magnons, polaritons, electromagnons, spins </li>
+            <li>(Multi)ferroic materials </li>
+            <li>Strongly correlated electron systems</li>
+            <li>Low-dimensional structures </li>
+            <li>Disordered, amorphous and soft matter</li>
+            <li>Materials under extreme conditions</li>
+            <li>Frontiers of experimental and theoretical methods</li>
+        </ul>
+        </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+</script>
+
+</body>
+</html>

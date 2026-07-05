@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+  <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+  <div class="ui segment">
+  <h2>Invited Speakers</h2>
+    <br>
+    <div id="img_container">
+      <div onclick="window.open('https://www.fzu.cz/en/hlinka', '_blank');" style="cursor: pointer;">
+    <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Hlinka.jpg}">
+      <div class="img_caption">
+        <p style="font-size: 23px;margin-bottom: 5px;">Prof. J. Hlinka</p>
+        <p><strong>Czech Academy of Sciences</strong></p>
+      </div></div>
+      <div onclick="window.open('https://www.fzu.cz/en/kamba', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Kamba.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Prof. S. Kamba</p>
+          <p><strong>Czech Academy of Sciences</strong></p>
+        </div></div>
+      <div onclick="window.open('https://www.physik.uni-kiel.de/de/institute/ieap/ag_talebi/members/h-m/prof-dr-nahid-talebi', '_blank');" style="cursor: pointer;">
+      <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Talebi.jpg}">
+      <div class="img_caption">
+        <p style="font-size: 23px;margin-bottom: 5px;">Prof. N. Talebi</p>
+        <p><strong>Christian-Albrechts-Universität zu Kiel, Germany</strong></p>
+      </div></div>
+      <div onclick="window.open('https://pc.fhi-berlin.mpg.de/latdyn/peopledir/group-members/alexander-paarmann/', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Paarmann.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Dr. A. Paarmann</p>
+          <p><strong>Fritz Haber Institute Berlin, Germany</strong></p>
+        </div></div>
+      <div onclick="window.open('https://tu-dresden.de/mn/physik/ifmp/ultraschnelle-festkoerperphysik-photonik/die-professur/mitarbeiter/prof-stefan-kaiser', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Kaiser.jpeg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Prof. S. Kaiser</p>
+          <p><strong>Technische Universität Dresden, Germany</strong></p>
+        </div></div>
+      <div onclick="window.open('https://www.nfchilton.com/people.html', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Blackmore.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Dr. W. Blackmore</p>
+          <p><strong>Manchester University, England</strong></p>
+        </div></div>
+      <div onclick="window.open('https://www.hzdr.de/db/!ContMan.Visi.Card?pUid=3067&pNid=580', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Wosnitza.JPG}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Prof. J. Wosnitza</p>
+          <p><strong>Helmholtz-Zentrum Dresden-Rossendorf, Germany</strong></p>
+        </div></div>
+      <div onclick="window.open('https://docente.unife.it/federico.montoncello', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Montoncello.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Prof. F. Montoncello</p>
+          <p><strong>University of Ferrara, Italy</strong></p>
+        </div></div>
+      <div onclick="window.open('https://wwwen.uni.lu/research/fstm/dphyms/people/mael_guennou', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Guennou.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Prof. M. Guennou</p>
+          <p><strong>University of Luxembourg</strong></p>
+        </div></div>
+      <div onclick="window.open('https://www.hzdr.de/db/!ContMan.Visi.Card?pUser=118987&pNid=2243&pLang=de', '_blank');" style="cursor: pointer;">
+        <img class="ui medium circular image" style="width: 200px;height: 200px; margin:0 auto;" th:src="@{/images/Deinert.jpg}">
+        <div class="img_caption">
+          <p style="font-size: 23px;margin-bottom: 5px;">Dr. J. Deinert</p>
+          <p><strong>Helmholtz-Zentrum Dresden-Rossendorf, Germany</strong></p>
+        </div></div>
+    </div>
+  </div>
+  <div th:include="footer :: footer"></div>
+  <br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>

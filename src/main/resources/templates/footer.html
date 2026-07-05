@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+        href="../static/resources/css/style.css" type="text/css"/>
+  <title>footer</title>
+</head>
+<div th:fragment="footer" th:id="footer">
+  <br><br><br>
+  <div style="border-top: 1px solid gray;">
+    <p></p>
+    <a style="color: black">DyProSo-2023</a>
+    <a href="https://tu-dresden.de/?set_language=en" target="_blank" rel="noopener noreferrer"></a>
+    <a style="color: black"></a>
+    <div style="float: right;">
+    <a th:href="@{/contact}">Contact &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      <a th:href="@{/privacy}">Privacy</a>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Create Account</title>
+<head th:include="templates/header :: header_basic"></head>
+
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <form method="post" role="form" id="form" th:action="@{/create_account}" th:object="${form}">
+        <div class="ui form" style="width:90%; margin-left: auto; margin-right: auto;">
+                        <h2 style="text-align: center;" class="ui header">Create Account</h2>
+
+            <p id="gray_information_text">Name, title, and affiliation as they appear on your name tag</p>
+                <div class="fields">
+                    <div class="five wide required field">
+                            <label>Last name:</label>
+                            <input type="text" id="lastname" name="lastname" th:field="*{lastname}"
+                                   autofocus="autofocus" required="required" autocomplete="off" placeholder="Smith"></input>
+                        <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" style="color: red"
+                             class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="seven wide required field">
+                            <label>First name(s):</label>
+                            <input type="text" id="name" name="name" th:field="*{name}" autofocus="autofocus"
+                                   required="required" autocomplete="off" placeholder="John"></input>
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"
+                                 class="invalid-feedback"></div>
+                        </div>
+
+
+                    <div class="four wide field">
+                        <label>Title</label>
+                        <input type="text" autofocus="autofocus" autocomplete="off" name="title" id="title" th:field="*{title}"></input>
+                    </div>
+
+                </div>
+            <div class="two fields">
+                        <div class="ten wide required field">
+                            <label for="mail">E-Mail Address:</label>
+                            <input type="email" id="mail" name="mail" th:field="*{mail}" autofocus="autofocus"
+                                   required="required" autocomplete="off" placeholder="smith@example.com"></input>
+                            <div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" style="color: red"
+                                 class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="six wide field">
+                            <label for="mail">Affiliation</label>
+                            <input type="text" id="Adress" name="Adress" th:field="*{adress}" autofocus="autofocus"
+                                   autocomplete="off" placeholder="Technische Universität Dresden"></input>
+                        </div>
+            </div>
+                        <div class="required field">
+                            <label for="password">Password:</label>
+                            <p id="password_info">The Password needs following requirements: One number, one lowercase, one uppercase, one special sign, 8 letters long</p>
+                            <input type="password" id="password" name="password" th:field="*{password}"
+                                   required="required" autocomplete="off"></input>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red"
+                                 class="invalid-feedback"></div>
+                </div>
+                        <div class="required field">
+                            <label for="password">Confirm Password:</label>
+                            <input type="password" id="rpassword" name="rpassword" th:field="*{rpassword}"
+                                   required="required" autocomplete="off"></input>
+                            <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" style="color: red"
+                                 class="invalid-feedback"></div>
+                        </div>
+
+
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox" required="required" tabindex="0" class="hidden" name="terms" id="terms">
+                    <label>I accept <a th:href="@{/terms}" target="_blank" rel="noopener noreferrer">terms & conditions</a></label>
+                    <div th:if="${#fields.hasErrors('terms')}" th:errors="*{terms}" style="color: red"
+                         class="invalid-feedback"></div>
+                </div>
+            </div>
+
+            <br>
+
+                        <button class="ui button" type="submit">Create account</button>
+                        <br>
+                        <p>Already have an account? To login click <a th:href="@{/login}">here</a></p>
+
+
+        </div>
+        </form>
+    </div>
+
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+<script>
+    $('.ui.checkbox').checkbox();
+</script>
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+
+
+</html>

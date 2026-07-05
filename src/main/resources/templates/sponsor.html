@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container" style="width: 75%">
+    <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+  <h2>Sponsors</h2>
+        <p>We are grateful for the generous support of our sponsors:</p>
+        <div id="img_container">
+            <div onclick="window.open('https://tu-dresden.de/mn/chemie/sfb1415', '_blank');" style="cursor: pointer; margin-top: auto;">
+        <img class="ui medium image" style="width: 200px;height: auto; margin:0 auto;" th:src="@{/images/crc.png}">
+                <div class="img_caption">
+                    <p style="font-size: 17px;"><strong>DFG Collaborative Research Center 1415</strong></p>
+                </div>
+            </div>
+        <div onclick="window.open('https://www.topag.de/', '_blank');" style="cursor: pointer; margin-top: auto;">
+            <img class="ui medium image" style="width: 200px;height: auto; margin:0 auto;" th:src="@{/images/topag.png}">
+            <div class="img_caption">
+                <p style="font-size: 17px;margin-top: 25px;"><strong>TOPAG Lasertechnik GmbH</strong></p>
+            </div>
+        </div>
+            <div onclick="window.open('https://www.cryoandmore.de/', '_blank');" style="cursor: pointer; margin-top: auto;">
+                <img class="ui medium image" style="width: 200px;height: auto; margin:0 auto;" th:src="@{/images/cryoandmore.jpg}">
+                <div class="img_caption">
+                    <p style="font-size: 17px;margin-top: 20px;"><strong>Cryoandmore GbR</strong></p>
+                </div>
+            </div>
+        <div style="margin-top: auto;">
+                <div class="img_caption">
+                    <div onclick="window.open('https://www.infineon.com/cms/en/', '_blank');" style="cursor: pointer;">
+                    <img class="ui medium image" style="width: 200px;height: auto; margin:0 auto;" th:src="@{/images/infineon.png}">
+                        <p style="font-size: 17px;margin-top: 15px;margin-bottom: 0px;"><strong>Infineon Technologies AG</strong></p></div>
+                    <a style="margin-top: 0px;" th:href="@{/files/Infineon_Infomation_and_Job_Offers.pdf}" download="Infineon_Information_and_Job_Offers.pdf">Visit Infineon Information and Job Offers!</a>
+                </div>
+            </div>
+            <div onclick="window.open('https://www.attocube.com/en', '_blank');" style="cursor: pointer; margin-top: auto;">
+                <img class="ui medium image" style="width: 220px;height: auto; margin:0 auto;" th:src="@{/images/attocube.png}">
+                <div class="img_caption">
+                    <p style="font-size: 17px;margin-top: 15px;margin-left:13px;"><strong>attocube systems AG</strong></p>
+                </div>
+            </div>
+            <div onclick="window.open('https://www.neaspec.com/', '_blank');" style="cursor: pointer; margin-top: auto;">
+                <img class="ui medium image" style="width: 200px;height: auto; margin:0 auto;" th:src="@{/images/neaspec.jpg}">
+                <div class="img_caption">
+                    <p style="font-size: 17px;margin-top: 15px;margin-left:13px;"><strong>neaspec</strong></p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+  <div th:include="footer :: footer"></div><br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>

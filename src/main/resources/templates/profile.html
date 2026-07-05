@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"
+title="Profile"></head>
+<title>Profile</title>
+<body>
+<div class="ui container">
+  <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+  <div class="ui segment">
+  <h1 class="ui dividing header">Profile</h1>
+      <a th:href="@{/profile/edit}" style="cursor: pointer; float: right" type="submit">
+        <i class="edit icon" style="color: gray; font-size: 1.4em;"></i>
+      </a>
+
+    <p style="margin-left: 1%;display:inline;float:left;">Name:</p><p th:text="${user.participant_name()}" class="user_val"></p>
+    <p style="margin-left: 1%;display:inline;float:left;">E-Mail:</p><p th:text="${user.getMail()}" class="user_val"></p>
+    <p style="margin-left: 1%;display:inline;float:left;">Affiliation:</p><p th:text="${user.affiliationToString()}" class="user_val"></p>
+
+
+  <div th:if="${!docs.isEmpty()}">
+    <br>
+    <h2 class="ui dividing header">Your Abstracts</h2>
+    <table class="ui table">
+      <thead>
+      <tr><th>Name</th><th>Type</th><th>Categories</th><th>Download</th></tr>
+      </thead>
+      <tbody>
+      <tr th:each="doc : ${docs}">
+        <td th:text="${doc.toString()}"></td>
+        <td th:text="${doc.getType()}"></td>
+        <td th:text="${doc.categoriesToString()}" id="cat_col"></td>
+        <td><a th:href="@{/download/{id}(id=${doc.getId()})}">Download</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+    <br>
+  <div>
+    <h2 class="ui dividing header">Abstract Submission</h2>
+    <p>If you want to participate with oral or poster presentations, send in your abstract <a th:href="@{/upload}">here</a>.
+      <br>Abstracts should not exceed 1 page and may include max. 1 figure. Please note that we only accept source files (e.g. tex, docx).<br>If you encounter any problems, please contact us <a href="/contact">here</a>.</p>
+    <p>We recommend using our abstract templates in the formats <a th:href="@{/files/DyProSo-2023_abstract_template.zip}">tex</a>, <a th:href="@{/files/DyProSo-2023_abstract_template.docx}">docx</a>.</p>
+  </div>
+  <h2 class="ui dividing header">Registration</h2>
+    <form class="ui form" th:if="${!user.isRegistered()} and ${registration_state} == 1" method="post" th:action="@{/profile}" th:object="${realRegistrationForm}">
+      <h4 class="ui header">Type of participant</h4>
+      <div class="inline fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="student" th:field="*{student}" value="FALSE" tabindex="0" class="hidden" required="required">
+            <label>Regular participant</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="student" th:field="*{student}" value="TRUE" tabindex="0" class="hidden" required="required">
+            <label>Student</label>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="ui header">Type of billing address</h4>
+      <div class="inline fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_non_EU(this)" value="PERSONAL" tabindex="0" class="hidden" required="required">
+            <label>Personal billing address</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_in_EU(this)" value="EU" tabindex="0" class="hidden" required="required">
+            <label>Business address (Institution / Company) within EU</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="type_of_billing_address" th:field="*{type_of_billing_address}" onchange="show_billing_address_form_non_EU(this)" value="NONEU" tabindex="0" class="hidden" required="required">
+            <label>Business address (Institution / Company) non-EU</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="billing_address_form" class="field" style="display:none;">
+        <div class="fields">
+          <div class="three wide required field">
+            <label>Last name</label>
+            <input type="text" autocomplete="off" name="billing_address_lastname" id="billing_address_lastname" th:field="*{billing_address_lastname}" placeholder="Smith" >
+            <div th:if="${#fields.hasErrors('billing_address_lastname')}" th:errors="*{billing_address_lastname}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+          <div class="four wide required field">
+            <label>First name(s)</label>
+            <input type="text" autocomplete="off" name="billing_address_firstname" id="billing_address_firstname" th:field="*{billing_address_firstname}" placeholder="John" >
+            <div th:if="${#fields.hasErrors('billing_address_firstname')}" th:errors="*{billing_address_firstname}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+          <div class="nine wide field">
+            <label>Company name or post office box of the university</label>
+            <input type="text" autocomplete="off" name="billing_address_poBox" th:field="*{billing_address_poBox}"  placeholder="Institut für Angewandte Physik (IAP), Technische Universität Dresden">
+          </div>
+        </div>
+        <div class="fields">
+          <div class="twelve wide required field">
+            <label>Street</label>
+            <input type="text" autocomplete="off" placeholder="Nöthnitzer Str. 61" name="billing_address_street" th:field="*{billing_address_street}">
+            <div th:if="${#fields.hasErrors('billing_address_street')}" th:errors="*{billing_address_street}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+          <div class="four wide required field">
+            <label>Postal code</label>
+            <input type="text" autocomplete="off" placeholder="01187" name="billing_address_postalCode" th:field="*{billing_address_postalCode}">
+            <div th:if="${#fields.hasErrors('billing_address_postalCode')}" th:errors="*{billing_address_postalCode}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <div class="two fields">
+          <div class="required field">
+            <label>City</label>
+            <input type="text" autocomplete="off" placeholder="Dresden" name="billing_address_city" id="billing_address_city" th:field="*{billing_address_city}">
+            <div th:if="${#fields.hasErrors('billing_address_city')}" th:errors="*{billing_address_city}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+          <div class="required field">
+            <label>Country</label>
+            <input type="text" autocomplete="off" placeholder="Germany" name="billing_address_country" id="billing_address_country" th:field="*{billing_address_country}">
+            <div th:if="${#fields.hasErrors('billing_address_country')}" th:errors="*{billing_address_country}" style="color: red"
+                 class="invalid-feedback"></div>
+          </div>
+        </div>
+        <div id="vat_number_form" class="required field" style="display:none;">
+          <label>Institution/Company VAT number</label>
+          <input type="text" autocomplete="off" placeholder="IE1234567T" name="vat_number" th:field="*{vat_number}">
+          <div th:if="${#fields.hasErrors('vat_number')}" th:errors="*{vat_number}" style="color: red"
+               class="invalid-feedback"></div>
+        </div>
+        <br>
+      </div>
+
+      <h4 style="margin-bottom:-1px">I will take part in the <a th:href="@{/excursion}" target="_blank" rel="noopener noreferrer">excursion</a> to the HZDR (Friday, 29<sup>th</sup> September 2023, €40)</h4>
+        <p style="color: gray; font-size: 12px;margin-top:-1px;">Photo ID (passport or ID card) is required for the excursion</p>
+        <div class="inline fields">
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="hzdr" th:field="*{hzdr}" onchange="show_form(this)" value="TRUE" required="required" >
+              <label>Yes</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="hzdr" th:field="*{hzdr}" onchange="hide_form(this)" value="FALSE" required="required">
+              <label>No</label>
+            </div>
+          </div>
+        </div>
+      <div id="excursion_form" style="display: none;">
+        <p style="color: gray; font-size: 12px;line-height:0px;">Name as it appears on your ID card or passport</p>
+      <div class="two fields">
+        <div class="required field">
+          <label>Last name</label>
+          <input type="text" autocomplete="off" placeholder="Smith" name="hzdr_lastname" th:field="*{hzdr_lastname}">
+          <div th:if="${#fields.hasErrors('hzdr_lastname')}" th:errors="*{hzdr_lastname}" style="color: red"
+               class="invalid-feedback"></div>
+        </div>
+        <div class="required field">
+          <label>First name(s)</label>
+          <input type="text" autocomplete="off" placeholder="John" name="hzdr_firstname" th:field="*{hzdr_firstname}">
+          <div th:if="${#fields.hasErrors('hzdr_firstname')}" th:errors="*{hzdr_firstname}" style="color: red"
+               class="invalid-feedback"></div>
+        </div>
+      </div>
+
+
+      <div class="fields">
+        <div class="six wide required field">
+          <label>Passport-/ID card number</label>
+          <input type="text" autocomplete="off" placeholder="L01X00T47" name="hzdr_cardnumber" th:field="*{hzdr_cardnumber}">
+          <div th:if="${#fields.hasErrors('hzdr_cardnumber')}" th:errors="*{hzdr_cardnumber}" style="color: red"
+               class="invalid-feedback"></div>
+        </div>
+        <div class="ten wide required field">
+          <label>Date of birth</label>
+              <input type="date" placeholder="19.05.2000" name="hzdr_birthdate" th:field="*{hzdr_birthdate}">
+          <div th:if="${#fields.hasErrors('hzdr_birthdate')}" th:errors="*{hzdr_birthdate}" style="color: red"
+               class="invalid-feedback"></div>
+      </div>
+        </div>
+      </div>
+    <br>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input type="checkbox" tabindex="0" name="photo_permission" id="photo_permission" checked="checked" class="hidden">
+          <label>I accept that I may be photographed</label>
+        </div>
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+      <p style="color: gray; font-size: 12px;">If you would like to purchase additional tickets for the conference dinner or excursion, the option will be given after your submission.</p>
+
+    </form>
+
+    <div th:if="${user.isRegistered()} and ${registration_state} == 1 or ${user.isRegistered()} and ${registration_state} == 2">
+      <p>Thank you for registering for DyProSo-2023.</p>
+      <h4>Your registrations</h4>
+      <table class="ui table">
+        <thead>
+        <tr><th>Participant</th><th>Billing address</th><th style="text-align: center;">Conference dinner</th><th style="text-align: center;">HZDR</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td th:text="${user.participant_name()}"></td>
+          <td th:text="${user.billing_address_toString()}"></td>
+          <td style="text-align: center;"><i class="check icon"></i></td>
+          <td th:if="${!user.getHzdr()}" style="text-align: center;"><i class="x icon"></i></td>
+          <td th:if="${user.getHzdr()}" style="text-align: center;"><i class="check icon"></i></td>
+        </tr>
+        <tr th:each="companion : ${companions}">
+          <td>Accompanying person</td>
+          <td th:text="${companion.billing_address_toString()}"></td>
+          <td th:if="${!companion.isSocial_programm()}" style="text-align: center;"><i class="x icon"></i></td>
+          <td th:if="${companion.isSocial_programm()}" style="text-align: center;"><i class="check icon"></i></td>
+          <td th:if="${!companion.isHzdr()}" style="text-align: center;"><i class="x icon"></i></td>
+          <td th:if="${companion.isHzdr()}" style="text-align: center;"><i class="check icon"></i></td>
+        </tr>
+        </tbody>
+      </table>
+      <p th:if="${registration_state} == 1">If you would like to purchase additional tickets for the conference dinner or excursion click <a th:href="@{/additional_tickets}">here</a></p>
+    </div>
+    <p th:if="${registration_state} == 0">The registration phase starts on <strong>June 1, 2023</strong>.</p>
+    <p th:if="${registration_state} == 2 and ${!user.isRegistered()}">The registration phase has ended.</p>
+    <p th:if="${registration_state} == 2 and ${user.isRegistered()}"><br>The registration phase has ended.</p>
+
+  </div>
+  <div th:include="footer :: footer"></div><br>
+</div>
+
+
+
+
+<script>
+window.onload = function(){
+    show_type_form();
+    show_excursion_form()
+  };
+
+
+  function show_type_form(){
+    var radioButtons = document.getElementsByName("type_of_billing_address");
+  var divBlockX = document.getElementById("billing_address_form");
+  var divBlockY = document.getElementById("vat_number_form");
+
+  for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      if (radioButtons[i].value === "EU") {
+        divBlockX.style.display = "block";
+        divBlockY.style.display = "block";
+      } else {
+        divBlockX.style.display = "block";
+        divBlockY.style.display = "none";
+      }
+      return;
+    }
+  }
+
+  divBlockX.style.display = "none";
+  divBlockY.style.display = "none";
+  }
+
+  function show_excursion_form(){
+    var radioButtons = document.getElementsByName("hzdr");
+  var divBlockX = document.getElementById("excursion_form");
+
+  for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+      if (radioButtons[i].value === "TRUE") {
+        divBlockX.style.display = "block";
+        return;
+      }
+    }
+  }
+
+  divBlockX.style.display = "none";
+  }
+</script>
+</body>
+</html>

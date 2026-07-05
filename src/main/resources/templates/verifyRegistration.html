@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_verify"></head>
+<body>
+<div class="ui container" >
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment" th:object="${attendee}">
+        <div class="ui grid" id="log_form">
+            <div class="row">
+                <div class="column">
+        <h2 class="ui header" style="text-align: center">Verify your email</h2>
+        </div>
+            </div>
+            <div class="row" th:if="${success}">
+                <div class="column">
+                    <div class="ui positive message">
+                        <div class="header">
+                            A verification link has been sent to your email account.
+                        </div>
+                        <p>Please check your email and click on the provided link to verify your account.<br>Be aware of your spam folder.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" th:if="${!success}">
+                <div class="column">
+                    <div class="ui negative message">
+                        <div class="header">
+                            An error occurred while sending mail.
+                        </div>
+                        <p>Please try again or contact support.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <form th:action="@{/verify}" name="theForm" method="post" style="text-align: center;">
+                        <input type="hidden" th:value="${user.getId()}" name="userId" id="userId">
+                        <button class="ui button" type="submit" id="but">Resend mail</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div th:include="footer :: footer"></div>
+<br>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+
+
+</script>
+</body>
+</html>

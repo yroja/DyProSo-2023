@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<!-- Navigation Bar-->
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div sec:authorize="hasRole('ADMIN')" class="ui segment">
+        <h3>Upload DyProSo-2023 schedule</h3>
+        <form th:action="@{/post_schedule}"  method="post" enctype="multipart/form-data">
+        <div class="ui form">
+
+            <input type="file" name="file" required>
+            <br>
+            <input class="ui button" style="margin:10px" type="submit" value="upload schedule">
+
+            </div>
+
+
+    </form>
+        <form style="margin:10px;" th:action="@{/delete_schedule}" method="post"><button class="ui button" type="submit">Delete</button></form></div>
+        <div class="ui segment">
+        <h2>Timetable</h2>
+            <p>Please find the detailed program including all abstracts for download here: <strong><a th:href="@{/files/DyProSo_2023_Abstractbook.pdf}" download="DyProSo_2023_Abstractbook.pdf">Abstract Book of the DyProSo-2023</a></strong></p>
+
+                <table style="padding-left:40px;padding-right:40px;padding-top:10px" class="ui very basic table">
+                    <thead>
+                    <tr>
+                        <th><strong>Monday, 25<sup>th</sup> September 2023</strong></th>
+                        <th style="width:33%;padding-left:100px;"></th>
+                        <th style="width:33%;padding-left:50px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>16:00 - 19:00</td>
+                        <td style="padding-left:100px;">Registration / Welcome Reception</td>
+                        <td>Rooftop at IAP/TUD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tuesday, 26<sup>th</sup> September 2023</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>08:45 - 09:00</td>
+                        <td style="padding-left:100px;">Welcome</td>
+                        <td>Lecture Hall IFW, (opposite IAP)</td>
+                    </tr>
+
+                    <tr>
+                        <td>09:00 - 10:00</td>
+                        <td style="padding-left:100px;">Keynote Talk I</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>10:00 - 10:30</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>10:30 - 12:25</td>
+                        <td style="padding-left:100px;">Talks (Session 1)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>12:30 - 13:30</td>
+                        <td style="padding-left:100px;">Lunch</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>13:30 - 15:00</td>
+                        <td style="padding-left:100px;">Postersession (Session 2)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>15:00 - 15:30</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>15:30 - 17:50</td>
+                        <td style="padding-left:100px;">Talks (Session 3)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Wednesday, 27<sup>th</sup> September 2023</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>09:00 - 10:00</td>
+                        <td style="padding-left:100px;">Keynote II</td>
+                        <td>Lecture Hall IFW, (opposite IAP)</td>
+                    </tr>
+
+                    <tr>
+                        <td>10:00 - 10:30</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>10:30 - 12:40</td>
+                        <td style="padding-left:100px;">Talks (Session 4)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>12:40 - 13:30</td>
+                        <td style="padding-left:100px;">Lunch</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>13:30 - 15:30</td>
+                        <td style="padding-left:100px;">Excursion I</td>
+                        <td><a href="https://www.slub-dresden.de/en/explore/manuscripts/the-dresden-maya-codex" target="_blank" rel="noopener noreferrer">University Library Treasury</a> / <a href="https://tu-dresden.de/kustodie/sammlungen-kunstbesitz/mathematik-naturwissenschaften/hermann-krone-sammlung?set_language=en" target="_blank" rel="noopener noreferrer">Hermann Krone Collection</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>15:30 - 16:00</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>16:00 - 17:55</td>
+                        <td style="padding-left:100px;">Talks (Session 5)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>19:00</td>
+                        <td style="padding-left:100px;">Dinner</td>
+                        <td><a href="https://goo.gl/maps/7tP3frqBp3UrF1x28" target="_blank" rel="noopener noreferrer">Café Vis-á-Vis on Brühl’s Terrace</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Thursday, 28<sup>th</sup> September 2023</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>09:00 - 10:00</td>
+                        <td style="padding-left:100px;">Keynote III</td>
+                        <td>Lecture Hall IFW, (opposite IAP)</td>
+                    </tr>
+
+                    <tr>
+                        <td>10:00 - 10:30</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>10:30 - 12:25</td>
+                        <td style="padding-left:100px;">Talks (Session 6)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>12:30 - 13:30</td>
+                        <td style="padding-left:100px;">Lunch</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>13:30 - 15:00</td>
+                        <td style="padding-left:100px;">Talks (Session 7)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>15:00 - 15:30</td>
+                        <td style="padding-left:100px;">Coffee</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>15:30 - 17:20</td>
+                        <td style="padding-left:100px;">Talks (Session 8)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>17:20 - 17:30</td>
+                        <td style="padding-left:100px;">Closing Remarks</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Friday, 29<sup>th</sup> September 2023</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>All Day</td>
+                        <td style="padding-left:100px;"><a th:href="@{/excursion}" target="_blank" rel="noopener noreferrer">Excursion II (HZDR)</a></td>
+                        <td></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        <div th:include="footer :: footer"></div>
+        <br>
+
+    </div>
+
+    <script>
+          $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+        </script>
+    </body>
+    </html>

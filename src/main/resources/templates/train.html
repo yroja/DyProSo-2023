@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+  <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+  <div class="ui segment">
+  <h2>Arrival by train</h2>
+  <p>If you want to purchase a train ticket you can click <a href="https://reiseauskunft.bahn.de/bin/query.exe/d?Z=Dresden%20Hbf" target="_blank" rel="noopener noreferrer">here</a>.</p>
+  <p>This is a map from the Dresden Hauptbahnhof to the venue.</p>
+    <div class="map_responsive">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d40145.97573633737!2d13.70158699776333!3d51.032340017341326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x4709c58a94b41b61%3A0xfbbe83a7b0303b75!2sHauptbahnhof%2C%2001069%20Dresden!3m2!1d51.041028399999995!2d13.7329411!4m5!1s0x4709c5c2eb123f35%3A0x92f1d89ea5be3360!2sInstitut%20f%C3%BCr%20Angewandte%20Physik%20-%20IAP%2C%20N%C3%B6thnitzer%20Stra%C3%9Fe%2C%20Dresden!3m2!1d51.025987699999995!2d13.7256916!5e0!3m2!1sen!2sen!4v1678207942106!5m2!1sen!2sen" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    </div>
+    <div th:include="footer :: footer"></div>
+  <br>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment" id="seg" sec:authorize="hasRole('ADMIN')">
+        <form class="ui form" role="form" method="post" th:action="@{/news}" th:if="${edit} == false">
+            <div class="ui grid" id="log_form">
+                <div class="row">
+                    <div class="column">
+                        <h2 style="text-align: center" class="ui header">Publish news</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label for="header">Header</label>
+                            <input name="header" id="header" required="required" autofocus="autofocus"
+                                   autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label for="content">Content</label>
+                            <textarea name="content" id="content" rows="5" cols="50" required="required"
+                                      autofocus="autofocus" autocomplete="off" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <input type="submit" value="Publish" class="ui button">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="ui form" role="form" method="post" th:action="@{/news/{id}(id=${newsToEdit.getId()})}" th:if="${edit} == true">
+            <div class="ui two column centered grid">
+                <div class="row">
+                    <div class="column">
+                        <h2 style="text-align: center" class="ui header">Publish news</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label for="header">Header</label>
+                            <input name="header_edit" id="header_edit" required="required" autofocus="autofocus"
+                                   autocomplete="off" th:value="${newsToEdit.getHeader()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="field">
+                            <label for="content">Content</label>
+                            <textarea name="content_edit" id="content_edit" rows="5" cols="50" required="required"
+                                      autofocus="autofocus" autocomplete="off" maxlength="1000"
+                                      th:value="${newsToEdit.getContent()}"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <input type="submit" value="Edit" class="ui button">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="ui segment" id="tex">
+        <div class="welcome-text" id="welcome_text">
+            <h2 th:text="'Welcome ' + ${name}"></h2>
+            <p style="white-space: pre-line;">Welcome to the 39th International Symposium on Dynamical Properties of Solids – DyProSo-2023.</p>
+
+            <p style="white-space: pre-line;"><strong>DyProSo-2023 will take place between September 25 – 29, 2023 in Dresden, Germany.</strong></p>
+            <p style="white-space: pre-line;">DyProSo is an international biannual research meeting devoted to the research on functional properties of condensed matter that result from elementary excitations, molecular motions, transport processes, and other dynamic phenomena occurring in many body systems. Discussions on experimental evidences and investigations, as well as theoretical models and predictions are of particular relevance at DyProSo-2023.</p>
+            <p style="white-space: pre-line;">A special purpose of this DyProSo Symposium is to trigger the scientific dialogue between young and experienced researchers exploring the working in the field of dynamics of materials.</p>
+            <br>
+            <div id="logos">
+                <img th:src="@{/images/dresdenConcepts2.png}" id="dresden_concepts"></a>
+                <img th:src="@{/images/TUD.png}" id="tud_png"></a>
+        </div>
+        </div>
+        <div class="ui raised segment" id="news_block">
+            <h2>News:</h2>
+            <div class="vertical-menu" id="news_vert">
+                <div th:each="news : ${allnews}" class="ui segment" style="width: 97%">
+                    <form th:action="@{/deleteNews/{id}(id=${news.getId()})}" method="post" th:id="delete + ${news.getId()}" sec:authorize="hasRole('ADMIN')">
+                    <a th:onclick="document.getElementById('delete' + [[${news.getId()}]]).submit()" style="cursor: pointer;float: right;" type="submit">
+                        <i class="trash icon" style="color:red;"></i>
+                    </a>
+                    </form>
+                    <form th:action="@{/editNews/{id}(id=${news.getId()})}" method="post" th:id="edit + ${news.getId()}" sec:authorize="hasRole('ADMIN')">
+                        <a th:onclick="document.getElementById('edit' + [[${news.getId()}]]).submit()" style="cursor: pointer; float: right" type="submit">
+                            <i class="edit icon" style="color: gray"></i>
+                        </a>
+                    </form>
+                    <div>
+                    <h4 th:text="${news.getHeader()}" style="width: 95%"></h4>
+                    <div th:text="${news.getContent()}"></div>
+                    <div class="ui feed">
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary">
+                                    <p style="float: right" class="date" th:text="${news.getDate()}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+<script th:inline="javascript">
+    if(document.getElementById("content_edit") !== null && document.getElementById("content_edit") !== undefined){
+        document.getElementById("content_edit").value += [[${newsToEdit.getContent()}]];
+    }
+</script>
+</body>
+</html>

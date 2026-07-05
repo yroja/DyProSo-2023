@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 class="ui header">Venue</h2>
+            <p>The evening before the talks there will be a coming together on the rooftop of the IAP building with the maintalks happening in the IFW
+                as outlined below:</p>
+        <p style="margin-left: 2%;display:inline;float:left;">25<sup>th</sup> September 2023:</p>
+        <p class="venue_addr"><strong>Come Together: Rooftop at IAP/TUD</strong><br>
+            Institute of Applied Physics /<br>
+            Institut für Angewandte Physik (IAP),<br>
+            TU Dresden, Germany;<br>
+            Nöthnitzer Str. 61, 01187 Dresden;<br>
+            Hermann-Krone-Bau
+        </p>
+        <p style="margin-left: 2%;display:inline;float:left;">26<sup>th</sup> - 28<sup>th</sup> September 2023:</p>
+        <p class="venue_addr"><strong>Lecture Hall IFW, (opposite IAP, see map)</strong><br>
+            Leibniz Institute for Solid State and Materials Research /<br>
+            Leibniz-Institut für Festkörper und Werkstoffforschung (IFW),<br>
+            Helmholtzstraße 20, 01069 Dresden
+        </p>
+        <a style="color: black;">Link to help you find the building on TUD-campus: </a><a href="https://navigator.tu-dresden.de/karten/dresden/geb/kro" target="_blank" rel="noopener noreferrer">https://navigator.tu-dresden.de/</a>
+        <br>
+        <div class="map_responsive_venue">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2235.6584243430966!2d13.724621028691494!3d51.026462936015776!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4709c5c2eb123f35%3A0x92f1d89ea5be3360!2sInstitut%20f%C3%BCr%20Angewandte%20Physik%20-%20IAP!5e0!3m2!1sen!2sen!4v1677886274425!5m2!1sen!2sen"
+                width="590" height="370" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <br>
+        <p>The conference takes place on the campus of the <a href="https://tu-dresden.de/?set_language=en" target="_blank" rel="noopener noreferrer">Technische Universität Dresden</a>:</p>
+        <div class="yt-vid-container-venue">
+            <div class="yt-vid">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/MPpnLnHXWII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+        </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+</body>
+</html>

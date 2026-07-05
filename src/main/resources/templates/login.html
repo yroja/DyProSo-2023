@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+    <div class="ui container">
+        <header th:include="templates/head :: head_basic"></header>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="ui segment">
+            <form class="ui form" method="post" role="form" th:action="@{/login}">
+
+                <div class="ui grid" id="log_form">
+                    <div class="row">
+                        <div class="column">
+                            <h2 style="text-align: center;"  class="ui header">Login</h2>
+                        </div>
+                    </div>
+
+                    <div th:if="${param.error}" class="row">
+                        <div class="column">
+                            <div  class="ui negative message">
+                                <div class="header" style="text-align: center;">
+                                    Invalid credentials.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:if="${param.logout}" class="row">
+                        <div class="column">
+                            <div  class="ui positive message">
+                                <div class="header" style="text-align: center;">
+                                    You have been logged out.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="column">
+                            <div class="field">
+                                <label for="username">E-Mail:</label>
+                                <input type="text" id="username" name="username" autofocus="autofocus" required="required" autocomplete="off"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="field">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password"  required="required" autocomplete="off"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="column">
+                            <button class="ui button" type="submit">Login</button><br><br>
+                            <p>Forgot password? To reset your password click <a th:href="@{/forgot_password}">here</a></p>
+                            <p>Dont have an Account? To create an Account click <a th:href="@{/create_account}">here</a></p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+        <div th:include="footer :: footer"></div>
+        <br>
+    </div>
+    </div>
+
+
+    <script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>

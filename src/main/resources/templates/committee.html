@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container" id="container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation" id="nav"></nav>
+
+
+    <div class="ui segment" id="seg">
+    <h2>Committees</h2>
+    <h3>Conference Chair</h3>
+    <ul>
+        <li>Prof. Lukas M. Eng, Technische Universität Dresden (<a href="https://tu-dresden.de/mn/physik/iap/experimentalphysik-photophysik" target="_blank" rel="noopener noreferrer">web page</a>)</li>
+    </ul>
+    <h3>DyProSo Advisory Board</h3>
+    <ul>
+        <li>Riccardo Cucini, CNR-IOM – Istituto Officina dei Materiali, Trieste, Italy</li>
+        <li>Sophie DeBrion, Institute Néel, CNRS, France</li>
+        <li>Lukas Eng, Technische Universität Dresden, Germany</li>
+        <li>Iñigo Etxebarria, University of the Basque Country, Bilbao, Spain</li>
+        <li>Jiří Hlinka, Institute of Physics, Prague, Czech Republic</li>
+        <li>Jiří Kulda, ILL Grenoble, France</li>
+        <li>Federico Montoncello, University of Ferrara, Ferrara, Italy</li>
+        <li>Joaquim Agostinho Moreira, University of Porto, Portugal</li>
+        <li>Sylvain Petit, LLB Saclay, France</li>
+        <li>Wilfried Schranz, University of Vienna, Austria (<a href="https://ufind.univie.ac.at/de/person.html?id=5054" target="_blank" rel="noopener noreferrer">web page</a>)</li>
+        <li>Mael Guennou, FSTM University of Luxembourg, Luxembourg</li>
+        <li><a href="https://sites.google.com/a/lens.unifi.it/torre/" target="_blank" rel="noopener noreferrer">Renato Torre</a>, LENS, Florence, Italy (<a href="https://lens.unifi.it/aboutus/profile/renato-torre" target="_blank" rel="noopener noreferrer">web page</a>)</li>
+        <li>Piotr Zieliński, Cracow University of Technology, Poland</li>
+    </ul>
+    <h3>Local Organisation Committee</h3>
+    <ul>
+        <li>Elke Beyreuther, TU Dresden</li>
+        <li>Dominique Herrmann-Buder, TU Dresden</li>
+        <li>Susanne C. Kehr, TU Dresden</li>
+        <li>Michael Rüsing, TU Dresden</li>
+        <li>Sam Seddon, TU Dresden</li>
+    </ul>
+    </div>
+
+    <div th:include="footer :: footer"></div><br>
+</div>
+</div>
+</body>
+</html>

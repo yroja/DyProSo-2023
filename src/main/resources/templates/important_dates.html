@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 class="ui dividing header">Important Dates</h2>
+        <p style="margin: 0;display:inline;float:left;">Abstract submission deadline: </p><p class="perio">15<sup>th</sup> July 2023</p>
+        <p style="margin: 0;display:inline;float:left;">Notification of contribution:  </p><p class="perio">25<sup>th</sup> July 2023</p>
+        <p style="margin: 0;display:inline;float:left;">Registration opening: </p><p class="perio">1<sup>st</sup> June 2023</p>
+        <p style="margin: 0;display:inline;float:left;">Early bird registration deadline: </p><p class="perio">7<sup>th</sup> August 2023</p>
+        <h2 class="ui dividing header">Fees</h2>
+        <p style="margin: 0;display:inline;float:left;">Registration: </p><p class="perio">350€ / 300€ / 250€  (Regular / Early Bird / Student)</p>
+        <p style="margin: 0;display:inline;float:left;">Additional Conference Dinner Ticket: </p><p class="perio">50€</p>
+        <p style="margin: 0;display:inline;float:left;">HZDR Excursion: </p><p class="perio">40€</p>
+        <br>
+        <p><strong><u>Important</u>:</strong> Due to technical reasons we accept only payments <strong>via bank transfer in advance</strong>.
+            Invoices are sent approximately two weeks after you have completed and submitted the registration form.
+            Credit card payments are not possible. We apologize for any inconvenience.</p>
+        <br>
+        <p><strong>For registration, please <a th:href="@{/create_account}">create an account</a> first. You can then fill out and submit the form in your <a th:href="@{/profile}">profile</a>.</strong></p>
+
+</div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+
+
+</script>
+</body>
+</html>

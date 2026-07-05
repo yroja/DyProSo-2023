@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+    <h2>Administration</h2>
+        <a th:href="@{/admin/accounts}"><button class="ui button" type="submit">User accounts</button></a>
+        <a th:href="@{/admin/documents}"><button class="ui button" type="submit">Documents</button></a>
+        <a th:href="@{/admin/download_list}"><button class="ui button" type="submit">Download billing information</button></a>
+        <a th:href="@{/admin/download_hzdr_informations}"><button class="ui button" type="submit">Download HZDR information</button></a>
+        <a th:href="@{/admin/download_nametags_photopermission}"><button class="ui button" type="submit">Download name-tags and photo permissions</button></a>
+    <h3 class="ui dividing header">Manage Abstract Submission</h3>
+        <div  class="ui negative message" th:if="${success == 1}" style="width: 20%">
+            <div class="header" >
+                Abstract Submission is now stopped.
+            </div>
+        </div>
+        <div  class="ui positive message" th:if="${success == 2}" style="width: 20%">
+            <div class="header" >
+                Abstract Submission is now active.
+            </div>
+        </div>
+        <form method="post" th:action="@{/admin}" style="float: left; margin-right: 5px;padding:5px 0 5px 0;">
+            <button type="submit" class="ui button" name="button" value="stop"><p style="color: red">Stop</p>Abstract Submission</button>
+        </form>
+        <form method="post" th:action="@{/admin}" style="margin-right: 5px;padding:5px 0 5px 0;">
+            <button type="submit" class="ui button" name="button" value="continue"><p style="color: green">Continue</p> Abstract Submission</button>
+        </form><br>
+
+        <h3 class="ui dividing header">Manage registration</h3>
+        <div  class="ui negative message" th:if="${success_registration_state == 0}" style="width: 20%">
+            <div class="header" >
+                Registration phase stopped
+            </div>
+        </div>
+        <div  class="ui negative message" th:if="${success_registration_state == 2}" style="width: 20%">
+            <div class="header" >
+                Registration phase ended
+            </div>
+        </div>
+        <div  class="ui positive message" th:if="${success_registration_state == 1}" style="width: 20%">
+            <div class="header" >
+                Registration phase started
+            </div>
+        </div>
+        <form method="post" th:action="@{/admin/change_register_state}" style="margin-right: 5px;padding:5px 0 5px 0;">
+            <button type="submit" class="ui button" name="register_state_button" value="start"><p style="color: green">Start</p> Registration</button>
+        </form>
+        <form method="post" th:action="@{/admin/change_register_state}" style="float: left; margin-right: 5px;padding:5px 0 5px 0;">
+            <button type="submit" class="ui button" name="register_state_button" value="before_start"><p style="color: red">Stop</p>Registration (Back before start)</button>
+        </form>
+        <form method="post" th:action="@{/admin/change_register_state}" style="margin-right: 5px;padding:5px 0 5px 0;">
+            <button type="submit" class="ui button" name="register_state_button" value="end"><p style="color: red">End</p> Registration</button>
+        </form><br>
+    </div>
+
+    <div th:include="footer :: footer"></div>
+</div>
+
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>

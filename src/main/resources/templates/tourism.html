@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment" id="tex">
+        <!-- Slideshow container -->
+        <div id="tourism_text">
+            <h2>Tourism</h2>
+            <p><a href="https://www.dresden.de/index_en.php" target="_blank" rel="noopener noreferrer">Dresden</a> – being famous for its <a href="https://visit.dresden360.com/" target="_blank" rel="noopener noreferrer">unique baroque
+                architecture</a> and the <a href="https://www.skd.museum/en/" target="_blank" rel="noopener noreferrer">collection of fine arts</a> – is situated beautifully at both sides of the river Elbe and bears a
+                number of culturally and touristically appealing attractions:</p>
+            <div class="yt-vid-container">
+            <div class="yt-vid">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1ZF3kCjul84" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            </div>
+                <br>
+            <br>
+            <p>Also the <a href="https://elbland.dresden360.com/" target="_blank" rel="noopener noreferrer">surroundings of Dresden</a> are worth a visit and you
+                will find one of Germanys most beautiful national parks the <a href="https://www.saechsische-schweiz.de/en/explore/national-park-saxon-switzerland" target="_blank" rel="noopener noreferrer">Saxon Switzerland</a> just within stone’s
+                throw of Dresden easily reachable by local train or in one of the <a href="https://www.saechsische-dampfschifffahrt.de/en/" target="_blank" rel="noopener noreferrer">paddle steamers</a> operating on the river Elbe:</p>
+            <div class="yt-vid-container">
+            <div class="yt-vid">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/flmZAxQCFN0" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+            </div>
+        </div>
+    <div id="slideshow_1" >
+        <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 7</div>
+                <img th:src="@{/images/Frauenkirche_Dresden.jpg}" style="width:100%">
+                <div class="text_caption">Frauenkirche Dresden. Photo: Florian Kneffel (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 7</div>
+                <img th:src="@{/images/Gemaeldegalerie_Alte_Meister.jpg}" style="width:100%">
+                <div class="text_caption">The Old Masters Picture Gallery with a view of Rafael's Sistine Madonna. Photo: Sebastian Weingart (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 7</div>
+                <img th:src="@{/images/Der_Dresdner_Zwinger.jpg}" style="width:100%">
+                <div class="text_caption">Photo of the inner courtyard of the Zwinger. Photo: Patrick Eichler (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 7</div>
+                <img th:src="@{/images/Der_Porzellanpavillon_im_Dresdner_Zwinger.jpg}" style="width:100%">
+                <div class="text_caption">The porcelain pavilion in the Zwinger Dresden. Photo: ddpix.de (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 7</div>
+                <img th:src="@{/images/Kulturpalast_Dresden-Konzertsaal_mit_Orchester.jpg}" style="width:100%">
+                <div class="text_caption">Kulturpalast Dresden concert hall with orchestra. Photo: Jörg Simanowski (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">6 / 7</div>
+                <img th:src="@{/images/Großer_Garten.jpg}" style="width:100%">
+                <div class="text_caption">Palaisteich in the Grosser Garten. Photo: Sven Döring/Agentur Focus (DML-BY)</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">7 / 7</div>
+                <img th:src="@{/images/Bruehlsche_Terrasse.jpg}" style="width:100%">
+                <div class="text_caption">The balcony of europe - the Brühl's Terrace with the Academy of Fine Arts Dresden. Photo: ddpix.de (DML-BY)</div>
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+        </div>
+    </div>
+    </div>
+  <div th:include="footer :: footer"></div><br>
+</div>
+
+</body>
+</html>

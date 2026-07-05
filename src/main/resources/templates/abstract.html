@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+  <header th:include="templates/head :: head_basic"></header>
+  <nav th:include="navigation :: navigation"></nav>
+  <div class="ui segment">
+  <h2>Abstract Submission</h2>
+  <div sec:authorize="!isAuthenticated()" th:if="${active}"><p>Please create an account to send in your abstract: <a th:href="@{/create_account}"> Create account</a></p>
+  <p>If you already have an Account, please <a th:href="@{/login}">login</a>.</p></div>
+  <div sec:authorize="isAuthenticated()" th:if="${active}"><p>If you want to participate with oral or poster presentations, send in your abstract <a th:href="@{/upload}">here</a>.
+    <br>Abstracts should not exceed 1 page and may include max. 1 figure. Please note that we only accept source files (e.g. tex, docx).</p>
+    <p>We recommend using our abstract templates in the formats <a th:href="@{/files/DyProSo-2023_abstract_template.zip}">tex</a>, <a th:href="@{/files/DyProSo-2023_abstract_template.docx}">docx</a>.</p></div>
+  <div th:if="${!active}"><p>We are sorry to inform you, that the abstract submission is closed.</p>
+  </div>
+    <br>
+  </div>
+  <div th:include="footer :: footer"></div><br>
+</div>
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>

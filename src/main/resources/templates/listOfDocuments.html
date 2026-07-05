@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="templates/header :: header_listOfDocs"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h2 style="text-align: center;">Documents</h2>
+        <br>
+        <div style="position:relative;">
+        <form th:action="@{/applyFilters}" method="post">
+            <div class="ui segment" style="width: fit-content;max-width:45%;">
+                <h3 class="ui header">Filter</h3>
+            <div class="ui form" >
+        <div class="ui multiple dropdown" >
+            <input type="hidden" name="filters" onkeyup="success()">
+            <i class="filter icon"></i>
+            <span class="text">Filter abstracts</span>
+            <div class="menu">
+                <div class="header">
+                    <i class="tags icon"></i>
+                    Tag Label
+                </div>
+                <div class="scrolling menu">
+                    <div class="item" data-value="Dynamic properties of matter;">
+                        <div class="ui red empty circular label"></div>
+                        Dynamic properties of matter
+                    </div>
+                    <div class="item" data-value="Phonons, plasmons, magnons, polaritons, electromagnons, spins;">
+                        <div class="ui blue empty circular label"></div>
+                        Phonons, plasmons, magnons, polaritons, electromagnons, spins
+                    </div>
+                    <div class="item" data-value="(Multi)ferroic materials;">
+                        <div class="ui black empty circular label"></div>
+                        (Multi)ferroic materials
+                    </div>
+                    <div class="item" data-value="Strongly correlated electron systems;">
+                        <div class="ui purple empty circular label"></div>
+                        Strongly correlated electron systems
+                    </div>
+                    <div class="item" data-value="Low-dimensional structures;">
+                        <div class="ui orange empty circular label"></div>
+                        Low-dimensional structures
+                    </div>
+                    <div class="item" data-value="Disordered, amorphous and soft matter;">
+                        <div class="ui yellow empty circular label"></div>
+                        Disordered, amorphous and soft matter
+                    </div>
+                    <div class="item" data-value="Materials under extreme conditions;">
+                        <div class="ui green empty circular label"></div>
+                        Materials under extreme conditions
+                    </div>
+                    <div class="item" data-value="Frontiers of experimental and theoretical methods;">
+                        <div class="ui brown empty circular label"></div>
+                        Frontiers of experimental and theoretical methods
+                    </div>
+
+                </div>
+            </div>
+        </div>
+                <br>
+                <div class="inline fields" style="margin-top: 1%;">
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="type" value="ALL" tabindex="0" class="hidden" checked="checked">
+                            <label>All</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="type" value="POSTER" tabindex="0" class="hidden">
+                            <label>Poster</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="type" value="TALK" tabindex="0" class="hidden">
+                            <label>Talk</label>
+                        </div>
+                    </div>
+                </div>
+
+
+        <button type="submit" id="button" class="ui button" style="overflow: hidden;">Apply</button>
+            <a th:href="@{/admin/documents}"><button class="ui button" type="button">Reset</button></a>
+            </div>
+            </div>
+
+        </form>
+        <a th:href="@{/download_bundled_abstracts}" style="position:absolute;right:0;bottom:0;"><button class="ui button" type="submit">Download all abstracts</button></a>
+        </div>
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th>Author</th>
+                <th>File Name</th>
+                <th>Download Link</th>
+                <th>Type</th>
+                <th>Categories</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doc : ${docs}">
+                <td th:text="${doc.getAuthor().getName()}"></td>
+                <td th:text="${doc.toString()}"></td>
+                <td><a th:href="@{/download/{id}(id=${doc.getId()})}">Download</a></td>
+                <td th:text="${doc.getType()}"></td>
+                <td th:text="${doc.categoriesToString()}"></td>
+                <td>
+                    <form method="post" th:action="@{/delete}">
+                    <input name="fileId" type="hidden" th:value="${doc.getId()}">
+                    <button class="ui button" type="submit">Delete</button>
+                </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+
+    <div th:include="footer :: footer"></div>
+</div>
+<script>
+    $('.ui.radio.checkbox').checkbox();
+</script>
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+
+</script>
+</body>
+</html>

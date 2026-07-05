@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_basic"></head>
+<body>
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <div class="ui grid" id="log_form">
+
+            <div class="row">
+                <div class="column">
+                    <h2 style="text-align: center;" class="ui header">Registration complete</h2>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom:0;line-height:0px;">
+                <div class="column">
+                    <div class="ui positive message" style="text-align: center;">
+                        <div class="header">
+                            Registration complete
+                        </div>
+                        <p>Thank you for registering for dyproso-2023</p>
+                    </div>
+                    <br>
+                </div>
+            </div>
+                    <div style="margin: 0 auto 0 auto;padding:0;padding-bottom:5px;">
+                    <a th:href="@{/additional_tickets}"><button class="ui button" type="button">Purchase additional tickets</button></a>
+                    <a th:href="@{/profile}"><button class="ui button" type="button">Back</button></a>
+                    </div>
+
+        </div>
+    </div>
+    <div th:include="footer :: footer"></div>
+    <br>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="templates/header :: header_edit"></head>
+<body>
+
+<div class="ui container">
+    <header th:include="templates/head :: head_basic"></header>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="ui segment">
+        <h1 class="ui header" style="text-align: center;">Edit Profile</h1>
+        <form class="ui form" method="post" th:action="@{/profile/edit}" th:object="${editForm}">
+            <h4 class="ui dividing header">Account Information</h4>
+            <p style="color: gray; font-size: 12px;line-height:0px;">Name, title and affiliation as they appear on your name tag</p>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Last name</label>
+                        <input type="text" name="lastname" th:value="${user.getLastname()}">
+                        <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" style="color: red"
+                             class="invalid-feedback"></div>
+
+                    </div>
+                    <div class="field">
+                        <label>First name(s)</label>
+                        <input type="text" name="firstname" th:value="${user.getName()}">
+                        <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" style="color: red"
+                             class="invalid-feedback"></div>
+                    </div>
+                </div>
+
+            <div class="fields">
+            <div class="twelve wide field">
+                <label>Affiliation</label>
+                        <input type="text" name="affiliation" id="affiliation" th:value="${user.getAffiliation()}">
+                    </div>
+                <div class="four wide field">
+                    <label>Title</label>
+                    <input type="text" name="title" id="title" th:value="${user.getTitle()}">
+                </div>
+            </div>
+
+            <br>
+            <button class="ui button" type="submit">Apply Changes</button>
+            <a th:href="@{/profile}"><button class="ui button" type="button">Cancel</button></a>
+        </form>
+
+
+    </div>
+    <div th:include="footer :: footer"></div><br>
+</div>
+
+<script>
+    $("#same_bill_bus").change(function() { $("#bus_addr").toggle() } );
+</script>
+<script>
+    const checkbox = document.querySelector("#same_bill_bus"); //get checkbox
+const div = document.querySelector("#bus_addr"); //get div
+if(checkbox.checked){  //if checkbox not checked
+  div.style.display = "none"; //hide div
+}else{
+  div.style.display = "initial";
+  };
+</script>
+<script>
+    $('.ui.checkbox').checkbox();
+</script>
+<script>
+      $(".ui.dropdown").dropdown({transition: 'drop', on: 'hover' });
+    </script>
+</body>
+</html>
