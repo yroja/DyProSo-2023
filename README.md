@@ -24,9 +24,9 @@ The application provides a centralized system to manage symposium participants a
 
 ---
 
-## ⚙️ Features
+## Features
 
-### 👤 User Management
+### User Management
 - Account creation with email verification
 - Secure login and logout
 - Password reset via email token
